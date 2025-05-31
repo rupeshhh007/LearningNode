@@ -2,8 +2,18 @@
 console.log("value of a is : " + a);
 */
 
-function sayHello(){
+
+/*function sayHello(){
     console.log("Hi guysss!!");
 }
 
-sayHello();
+sayHello();*/
+
+
+let age = 10;
+
+if (age >= 18) {
+  console.log("You are an adult.");
+} else {
+  console.log("You are a kid.");
+}
