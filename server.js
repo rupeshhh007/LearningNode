@@ -1,22 +1,31 @@
 const http = require("http");
+const fs = require("fs");
+const path = require("path");
 
 const server = http.createServer((req, res) => {
-  const url = req.url;
+  let filePath = "./pages" + req.url;
 
-  res.writeHead(200, { "Content-Type": "text/html" });
-
-  if (url === "/") {
-    res.end("<h1>Home Page</h1><p>Welcome to my Node.js server!</p>");
-  } else if (url === "/about") {
-    res.end("<h1>About Page</h1><p>This is a basic Node server.</p>");
-  } else if (url === "/contact") {
-    res.end("<h1>Contact Page</h1><p>Email us at hello@example.com</p>");
+  if (filePath === "./pages/") {
+    filePath = "./pages/index.html";
   } else {
-    res.writeHead(404);
-    res.end("<h1>404 Not Found</h1>");
+    filePath += ".html";
   }
+
+  const extname = path.extname(filePath);
+  const contentType = extname === ".html" ? "text/html" : "text/plain";
+
+  fs.readFile(filePath, (err, content) => {
+    if (err) {
+      res.writeHead(404, { "Content-Type": "text/html" });
+      res.end("<h1>404 - Page Not Found</h1>");
+      return; // 👈 prevent sending more responses
+    }
+
+    res.writeHead(200, { "Content-Type": contentType });
+    res.end(content);
+  });
 });
 
 server.listen(3000, () => {
-  console.log("Server running at http://localhost:3000");
+  console.log("Server is running at http://localhost:3000");
 });
