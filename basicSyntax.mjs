@@ -9,7 +9,7 @@ console.log("value of a is : " + a);
 
 sayHello();*/
 
-
+/*
 let age = 10;
 
 if (age >= 18) {
@@ -17,3 +17,4 @@ if (age >= 18) {
 } else {
   console.log("You are a kid.");
 }
+*/
